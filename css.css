@@ -1,0 +1,390 @@
+.chatwidget-bubble {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color:#859cc7;
+  cursor: pointer;
+  border-radius: 35px;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+  width: 183px;
+  height: 70px;
+  padding: 0 16px;
+  position: fixed;
+  bottom: 18px;
+  right: 17px;
+}
+.chatwidget-bubble .chatwidget-bubble-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+}
+.chatwidget-bubble .chatwidget-bubble-avatar img {
+  width: 100%;
+}
+.chatwidget-bubble .chatwidget-bubble-title {
+  color: #53337a;
+  font-weight: bolder;
+  font-size: 13px;
+  width: 83px;
+  text-align: center;
+  line-height: 14px;
+}
+.chatwidget-bubble .chatwidget-bubble-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background-color: #e5e5e5;
+}
+.chatwidget-bubble .chatwidget-bubble-button-close {
+  font-size: 30px;
+  font-weight: 600;
+  color: #adadad;
+}
+.chatwidget {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: fixed;
+  bottom: 0;
+  right: 17px;
+  z-index: 9999;
+}
+.chatwidget-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 400px;
+  width: 350px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-radius: 25px 25px 0 0;
+  overflow: hidden;
+}
+.chatwidget .chatwidget-header {
+  background-color: #66467d;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: auto;
+  align-items: stretch;
+  min-height: 70px;
+  padding: 0 135px;
+}
+.chatwidget .chatwidget-assistant {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.chatwidget .chatwidget-assistant-avatar {
+  position: relative;
+  left: -70px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.chatwidget .chatwidget-assistant-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 14px;
+}
+.chatwidget .chatwidget-assistant-info-title {
+  color: #fff;
+  font-weight: bolder;
+  font-size: 13px;
+  margin: 0;
+  
+}
+.chatwidget .chatwidget-assistant-info-status {
+  color: #fff;
+  font-weight: normal;
+  font-size: 12px;
+  margin: 0;
+}
+.chatwidget .chatwidget-toolbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: stretch;
+  list-style-type: none;
+}
+.chatwidget .chatwidget-toolbar-button {
+  display: inline-block;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  background-color: transparent;
+  color: #fff;
+  outline: none;
+  font-size: 30px;
+  font-weight: thin;
+  cursor: pointer;
+}
+.chatwidget .chatwidget-content {
+  padding: 10px 20px 10px 25px;
+  font-size: 14px;
+  height: 280px;
+  width: 320px;
+  overflow-y: auto;
+  background-color: #fff;
+}
+.chatwidget .chatwidget-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  max-width: 100%;
+  background-color: #fff;
+}
+.chatwidget .chatwidget-divider {
+  background-color: #fff;
+}
+.chatwidget hr {
+  margin: 0px 20px;
+  color: #c9c8c9;
+}
+.chatwidget .chatwidget-controls .chatwidget-controls-textinput {
+  overflow-y: hidden;
+  font-family: 'Montserrat', sans-serif;
+  resize: none;
+  outline: none;
+  border: none;
+  margin: 0px;
+  border-radius: 0;
+  opacity: 1;
+  display: inline-block;
+  flex-grow: 2;
+  padding: 20px;
+  width: 300px;
+
+}
+.chatwidget .chatwidget-controls-submit {
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  margin: 0;
+  margin-left: 10px;
+  height: 26px;
+  width: 26px;
+  transform: rotate(-40deg);
+}
+
+.chatwidget .chatwidget-message {
+  width: 100%;
+  margin-bottom: 10px;
+  font-size: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  animation: fadein 0.5s;
+}
+.chatwidget .chatwidget-message-received {
+  justify-content: flex-start;
+}
+.chatwidget .chatwidget-message-sent {
+  justify-content: flex-end;
+}
+.chatwidget .chatwidget-message .chatwidget-message-content {
+  padding: 10px 20px;
+  max-width: 70%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: #333;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chatwidget .chatwidget-message .chatwidget-message-content p {
+  margin: 5px;
+  overflow-wrap: break-word;
+  font-size: 13px;
+}
+.chatwidget .chatwidget-message .chatwidget-message-content a {
+  text-decoration: underline;
+  color: #f04b64;
+  font-weight: 600;
+}
+.chatwidget .chatwidget-message .chatwidget-message-content audio {
+  display: block;
+  max-width: 100%;
+}
+.chatwidget .chatwidget-message .chatwidget-message-content a:hover {
+  text-decoration: underline;
+}
+.chatwidget .chatwidget-message-received .chatwidget-message-content {
+  text-align: left;
+  background-color: #f7f1ff;
+  border-radius: 30px 30px 30px 0;
+  color: #53337a;
+}
+.chatwidget .chatwidget-message-sent .chatwidget-message-content {
+  text-align: right;
+  background-color: #f5f5f5;
+  border-radius: 30px 30px 0 30px;
+}
+.chatwidget .chatwidget-message-avatar {
+  width: 35px;
+  height: 35px;
+  margin-right: 7px;
+}
+.chatwidget .chatwidget-loader span {
+  display: inline-block;
+  border-radius: 100%;
+  width: 10px;
+  height: 10px;
+  animation: loader 1s infinite;
+}
+.chatwidget .chatwidget-loader span:nth-of-type(1) {
+  animation-delay: 100ms;
+}
+.chatwidget .chatwidget-loader span:nth-of-type(2) {
+  animation-delay: 200ms;
+}
+.chatwidget .chatwidget-loader span:nth-of-type(3) {
+  animation-delay: 300ms;
+}
+.chatwidget .chatwidget-action-slider {
+  width: 90%;
+}
+.chatwidget .chatwidget-action-slider .noUi-target {
+  margin: 40px auto 20px auto;
+}
+.chatwidget .chatwidget-action-slider .noUi-connect {
+  background-color: #66467d;
+}
+.chatwidget .chatwidget-action-slider .chatwidget-action-slider-button-submit {
+  padding: 5px 10px;
+  background-color: #66467d;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-top: 5px;
+  border-radius: 25px;
+}
+.chatwidget .chatwidget-action-slider .chatwidget-action-slider-button-submit:hover {
+  background-color: #77588d;
+}
+.chatwidget .chatwidget-action-slider .chatwidget-action-slider-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.chatwidget .chatwidget-action-slider .chatwidget-action-slider-form input[type="number"] {
+  width: 20%;
+}
+@media only screen and (max-width: 640px) {
+  .chatwidget {
+    /* phones */
+  }
+  .chatwidget .chatwidget-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0;
+    box-shadow: none;
+    border-radius: initial;
+  }
+  .chatwidget .chatwidget-controls-textinput {
+    font-size: 16px;
+  }
+}
+@keyframes loader {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+    background: #6e357c;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+@keyframes play {
+  100% {
+    background-position: -9900px;
+  }
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+@keyframes notification {
+  0% {
+    background-color: #fadf7d;
+  }
+  50% {
+    background-color: #f7f7f7;
+  }
+  100% {
+    background-color: #fadf7d;
+  }
+}
+@keyframes notification-after {
+  0% {
+    border-color: transparent transparent transparent #fadf7d;
+  }
+  50% {
+    border-color: transparent transparent transparent #f7f7f7;
+  }
+  100% {
+    border-color: transparent transparent transparent #fadf7d;
+  }
+}
+@keyframes slidein {
+  from {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0%;
+  }
+  to {
+    margin-left: 0%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+@keyframes enlarge {
+  from {
+    width: 83px;
+  }
+  to {
+    width: 200px;
+  }
+}
+.slider{
+  display: none;
+}

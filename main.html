@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link link rel="stylesheet" href="css.css">
+	<meta charset="utf-8">
+        <title>{{ Chatwidget }}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>        
+<div class="chatwidget chatwidget-container" id="container">
+</div>
+<div class="chatwidget-bubble" id="bubble">
+</div>
+<div class="chatwidget-message chatwidget-message-received" id="mes_received">
+</div>
+<div class="chatwidget-message chatwidget-message-sent" id="mes_sent">
+</div>
+<div class="chatwidget chatwidget-loader" id="loader">
+</div>
+<div > 
+    <div class = "slider"> bbbbbbbbbb </div>
+    <div class = "slider"> aaaaaaaaaa </div>
+</div>
+<script>
+
+var container = document.getElementById("container");
+var header1 = document.createElement("header");
+header1.className = "chatwidget-header";
+container.appendChild(header1);
+
+var div1 = document.createElement("div");
+    div1.className = "chatwidget-assistant";
+    header1.appendChild(div1);
+    var img = document.createElement("img");
+        img.className = "chatwidget-assistant-avatar"
+        img.src = "images/tinyrobot.jpg";
+        div1.appendChild(img);
+
+    var status_a = document.createElement("div");
+        status_a.className = "chatwidget-assistant-info";
+        div1.appendChild(status_a);
+        var h1 = document.createElement("h1");
+            h1.className = "chatwidget-assistant-info-title";
+            h1.innerHTML = "{{Titulo}}";
+            status_a.appendChild(h1);
+        var h2 = document.createElement("h2");
+            h2.className = "chatwidget-assistant-info-status";
+            h2.innerHTML = "{{status}}";
+            status_a.appendChild(h2);
+
+var div2 = document.createElement("div");
+    div2.className = "chatwidget-toolbar";
+    header1.appendChild(div2);
+
+var button_close = document.createElement("button");
+button_close.className = "chatwidget-toolbar-button chatwidget-toolbar-button-close";
+button_close.onclick = close;
+div2.appendChild(button_close);
+
+var content = document.createElement("div");
+content.className = "chatwidget-content";
+container.appendChild(content);
+
+var divider = document.createElement("div");
+divider.className = "chatwidget-divider";
+content.appendChild(divider);
+
+    var hr = document.createElement("hr");
+    divider.appendChild(hr);
+
+var form = document.createElement("form");
+form.className = "chatwidget chatwidget-controls";
+container.appendChild(form);
+
+    var textarea = document.createElement("textarea");
+    textarea.className = "chatwidget chatwidget-controls-textinput";
+    textarea.setAttribute("rows","1");
+    textarea.setAttribute("autocomplete","off");
+    textarea.setAttribute("placeholder","Escribe tu mensaje");
+    form.appendChild(textarea);
+
+
+var submit = document.createElement("button");
+submit.className = "chatwidget chatwidget-controls-submit";
+submit.setAttribute("type","submit");
+    var img_send = document.createElement("img");
+    img_send.src ="images/send.svg?1.0";
+    submit.appendChild(img_send);
+
+form.appendChild(submit);
+
+var bubble = document.getElementById("bubble");
+bubble.onclick = open;
+var bubbleavatar = document.createElement("div");
+bubbleavatar.className = "chatwidget-bubble-avatar";
+bubble.appendChild(bubbleavatar);
+    var imgb = document.createElement("img");
+        imgb.src = "images/tinyrobot.jpg";
+        bubbleavatar.appendChild(imgb);
+var bubcontent = document.createElement("div");
+bubcontent.className = "chatwidget-bubble-content";
+bubble.appendChild(bubcontent);
+var texto = document.createElement("p");
+texto.className = "chatwidget-bubble-title";
+texto.innerHTML = "{{Titulo}}";
+bubble.appendChild(texto);
+
+var message_received = document.getElementById("mes_received");
+message_received.className = "chatwidget-message chatwidget-message-received";
+var img_r = document.createElement("img");
+img_r.className = "chatwidget-message-avatar";
+img_r.setAttribute("alt","Avatar");
+img_r.src ="images/avatar.svg";
+message_received.appendChild(img_r);
+
+    var mes_content = document.createElement("div");
+    mes_content.className = "chatwidget-message-content";
+    message_received.appendChild(mes_content);
+
+        var mes_parr = document.createElement("p");
+        mes_parr.innerHTML = "¡Buenas Tardes!";
+        mes_content.appendChild(mes_parr);
+
+
+var message_sent = document.getElementById("mes_sent");
+message_sent.className = "chatwidget-message chatwidget-message-sent";
+
+    var sent_content = document.createElement("div");
+    sent_content.className = "chatwidget-message-content";
+    message_sent.appendChild(sent_content);
+
+        var parr_sent = document.createElement("p");
+        parr_sent.innerHTML = "¡Hola!";
+        sent_content.appendChild(parr_sent);
+
+content.appendChild(message_sent);
+content.appendChild(message_received);
+
+var loader = document.getElementById("loader");
+loader.className = "chatwidget chatwidget-loader";
+var span1 = document.createElement("span");
+var span2 = document.createElement("span");
+var span3 = document.createElement("span");
+
+loader.appendChild(span1);
+loader.appendChild(span2);
+loader.appendChild(span3);
+
+function close(){
+    container.style.display = "none"
+    bubble.style.display = "flex"
+}
+function open(){
+    container.style.display = "flex"
+    bubble.style.display = "none"
+}
+
+var carousel = document.createElement("div");
+carousel.className = "chatwidget-action-carousel-container";
+mes_content.appendChild(carousel);
+
+var carousel_container = document.createElement("div");
+carousel_container.innerHTML = "vaca"
+carousel_container.className = "chatwidget-action-carousel";
+carousel.appendChild(carousel_container);
+
+    var carousel_slide = document.createElement("div");
+    carousel_slide.className = "chatwidget-action-carousel-slide";
+    carousel_container.appendChild(carousel_slide);
+
+            var carousel_slide_content = document.createElement("div");
+            carousel_container.className = "chatwidget-action-carousel-slide-content";
+            carousel_slide.appendChild(carousel_slide_content);
+
+            var carousel_product_thumbnail_container = document.createElement("div");
+            carousel_product_thumbnail_container.className = "chatwidget-action-carousel-product-thumbnail-container";
+            carousel_slide_content.appendChild(carousel_product_thumbnail_container);
+
+            var carousel_product_thumbnail = document.createElement("img");
+            carousel_product_thumbnail.className = "chatwidget-action-carousel-product-thumbnail";
+            carousel_product_thumbnail.src = "{{img}}";
+            carousel_product_thumbnail_container.appendChild(carousel_product_thumbnail);
+
+            var product_info = document.createElement("div");
+            product_info.className = "chatwidget-action-carousel-product-info";
+            carousel_slide_content.appendChild(product_info);
+
+            var product_header = document.createElement("div");
+            product_header.className = "chatwidget-action-carousel-product-header";
+            product_info.appendChild(product_header);
+
+            var brand_product = document.createElement("span");
+            brand_product.className = "chatwigdet-action-carousel-product-brand";
+            brand_product.innerHTML = "{{brand}}";
+            product_header.appendChild(brand_product);
+
+            var product_name = document.createElement("h1");
+            product_name.className = "chatwidget-action-carousel-product-name";
+            product_name.setAttribute("title","{{name}}");
+            product_name.innerHTML = "{{name}}";
+            product_header.appendChild(product_name);
+
+var carousel_container = document.createElement("div");
+carousel_container.innerHTML = "gato"
+carousel_container.className = "chatwidget-action-carousel";
+carousel.appendChild(carousel_container);
+
+    var carousel_slide = document.createElement("div");
+    carousel_slide.className = "chatwidget-action-carousel-slide";
+    carousel_container.appendChild(carousel_slide);
+
+            var carousel_slide_content = document.createElement("div");
+            carousel_container.className = "chatwidget-action-carousel-slide-content";
+            carousel_slide.appendChild(carousel_slide_content);
+
+            var carousel_product_thumbnail_container = document.createElement("div");
+            carousel_product_thumbnail_container.className = "chatwidget-action-carousel-product-thumbnail-container";
+            carousel_slide_content.appendChild(carousel_product_thumbnail_container);
+
+            var carousel_product_thumbnail = document.createElement("img");
+            carousel_product_thumbnail.className = "chatwidget-action-carousel-product-thumbnail";
+            carousel_product_thumbnail.src = "{{img}}";
+            carousel_product_thumbnail_container.appendChild(carousel_product_thumbnail);
+
+            var product_info = document.createElement("div");
+            product_info.className = "chatwidget-action-carousel-product-info";
+            carousel_slide_content.appendChild(product_info);
+
+            var product_header = document.createElement("div");
+            product_header.className = "chatwidget-action-carousel-product-header";
+            product_info.appendChild(product_header);
+
+            var brand_product = document.createElement("span");
+            brand_product.className = "chatwigdet-action-carousel-product-brand";
+            brand_product.innerHTML = "{{brand}}";
+            product_header.appendChild(brand_product);
+
+            var product_name = document.createElement("h1");
+            product_name.className = "chatwidget-action-carousel-product-name";
+            product_name.setAttribute("title","{{name}}");
+            product_name.innerHTML = "{{name}}";
+            product_header.appendChild(product_name);
+
+
+var myIndex = 0;
+carousel();
+
+function carousel() {
+  var i;
+  var x = document.getElementsByClassName("slider");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  myIndex++;
+  if (myIndex > x.length) {myIndex = 1}    
+  x[myIndex-1].style.display = "block";  
+  setTimeout(carousel, 2000);
+}
+
+
+
+</script>
+
+
+</body>
+</html>
