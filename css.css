@@ -57,7 +57,7 @@
   z-index: 9999;
 }
 .chatwidget-container {
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: flex-start;
   height: 400px;
@@ -145,6 +145,10 @@
 }
 .chatwidget .chatwidget-divider {
   background-color: #fff;
+  margin: 0px 20px;
+  color: #c9c8c9;
+  bottom: 0px;
+  display: block;
 }
 .chatwidget hr {
   margin: 0px 20px;
