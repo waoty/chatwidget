@@ -85,7 +85,7 @@ var submit = document.createElement("button");
 submit.className = "chatwidget chatwidget-controls-submit";
 submit.setAttribute("type","submit");
     var img_send = document.createElement("img");
-    img_send.src ="images/send.svg?1.0";
+    img_send.src ="images/send.png";
     submit.appendChild(img_send);
 
 form.appendChild(submit);
@@ -106,36 +106,39 @@ texto.className = "chatwidget-bubble-title";
 texto.innerHTML = "{{Titulo}}";
 bubble.appendChild(texto);
 
-var message_received = document.getElementById("mes_received");
-message_received.className = "chatwidget-message chatwidget-message-received";
-var img_r = document.createElement("img");
-img_r.className = "chatwidget-message-avatar";
-img_r.setAttribute("alt","Avatar");
-img_r.src ="images/avatar.svg";
-message_received.appendChild(img_r);
-
-    var mes_content = document.createElement("div");
-    mes_content.className = "chatwidget-message-content";
-    message_received.appendChild(mes_content);
-
-        var mes_parr = document.createElement("p");
-        mes_parr.innerHTML = "¡Buenas Tardes!";
-        mes_content.appendChild(mes_parr);
-
-
-var message_sent = document.getElementById("mes_sent");
-message_sent.className = "chatwidget-message chatwidget-message-sent";
+function sentMessage(element) {
+    var message_sent = document.getElementById("mes_sent");
+    message_sent.className = "chatwidget-message chatwidget-message-sent";
 
     var sent_content = document.createElement("div");
     sent_content.className = "chatwidget-message-content";
     message_sent.appendChild(sent_content);
 
         var parr_sent = document.createElement("p");
-        parr_sent.innerHTML = "¡Hola!";
+        parr_sent.innerHTML = element;
         sent_content.appendChild(parr_sent);
 
-content.appendChild(message_sent);
-content.appendChild(message_received);
+    content.appendChild(message_sent);
+}
+
+function receivedMessage(element){
+    var message_received = document.createElement("div");
+    message_received.className = "chatwidget-message chatwidget-message-received";
+    content.appendChild(message_received);
+            var img_r = document.createElement("img");
+            img_r.className = "chatwidget-message-avatar";
+            img_r.setAttribute("alt","Avatar");
+            img_r.src ="images/avatar.svg";
+            message_received.appendChild(img_r);
+
+            var mes_content = document.createElement("div");
+            mes_content.className = "chatwidget-message-content";
+            message_received.appendChild(mes_content);
+            
+                var mes_parr = document.createElement("p");
+                mes_parr.innerHTML = element;
+                mes_content.appendChild(mes_parr);
+}
 
 var loader = document.getElementById("loader");
 loader.className = "chatwidget chatwidget-loader";
@@ -143,9 +146,9 @@ var span1 = document.createElement("span");
 var span2 = document.createElement("span");
 var span3 = document.createElement("span");
 
-loader.appendChild(span1);
-loader.appendChild(span2);
-loader.appendChild(span3);
+    loader.appendChild(span1);
+    loader.appendChild(span2);
+    loader.appendChild(span3);
 
 function close(){
     container.style.display = "none"
@@ -158,7 +161,7 @@ function open(){
 
 var carousel = document.createElement("div");
 carousel.className = "chatwidget-action-carousel-container";
-mes_content.appendChild(carousel);
+//mes_content.appendChild(carousel);
 
 var carousel_container = document.createElement("div");
 carousel_container.innerHTML = "vaca"
@@ -201,67 +204,66 @@ carousel.appendChild(carousel_container);
             product_name.innerHTML = "{{name}}";
             product_header.appendChild(product_name);
 
-var carousel_container = document.createElement("div");
-carousel_container.innerHTML = "gato"
-carousel_container.className = "chatwidget-action-carousel";
-carousel.appendChild(carousel_container);
-
-    var carousel_slide = document.createElement("div");
-    carousel_slide.className = "chatwidget-action-carousel-slide";
-    carousel_container.appendChild(carousel_slide);
-
-            var carousel_slide_content = document.createElement("div");
-            carousel_container.className = "chatwidget-action-carousel-slide-content";
-            carousel_slide.appendChild(carousel_slide_content);
-
-            var carousel_product_thumbnail_container = document.createElement("div");
-            carousel_product_thumbnail_container.className = "chatwidget-action-carousel-product-thumbnail-container";
-            carousel_slide_content.appendChild(carousel_product_thumbnail_container);
-
-            var carousel_product_thumbnail = document.createElement("img");
-            carousel_product_thumbnail.className = "chatwidget-action-carousel-product-thumbnail";
-            carousel_product_thumbnail.src = "{{img}}";
-            carousel_product_thumbnail_container.appendChild(carousel_product_thumbnail);
-
-            var product_info = document.createElement("div");
-            product_info.className = "chatwidget-action-carousel-product-info";
-            carousel_slide_content.appendChild(product_info);
-
-            var product_header = document.createElement("div");
-            product_header.className = "chatwidget-action-carousel-product-header";
-            product_info.appendChild(product_header);
-
-            var brand_product = document.createElement("span");
-            brand_product.className = "chatwigdet-action-carousel-product-brand";
-            brand_product.innerHTML = "{{brand}}";
-            product_header.appendChild(brand_product);
-
-            var product_name = document.createElement("h1");
-            product_name.className = "chatwidget-action-carousel-product-name";
-            product_name.setAttribute("title","{{name}}");
-            product_name.innerHTML = "{{name}}";
-            product_header.appendChild(product_name);
+function startConversation(message){
+  //loader
+  sendMessageWatson(message,function(res){
+    var a = res;
+    var b = res.output;
+    console.log(a)
+    console.log(b.text[0])
+    //lista de case de acuerdo al action, usar while dentro de cada case
+    //carousel, imagen, video, texto(default?)
+    sentMessage(message);
+    i = 0;
+    len = b.text.length;
+    while(i<len){
+        receivedMessage(b.text[i])
+        i++;
+    }
+    
+    
 
 
-var myIndex = 0;
-carousel();
 
-function carousel() {
-  var i;
-  var x = document.getElementsByClassName("slider");
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";  
-  }
-  myIndex++;
-  if (myIndex > x.length) {myIndex = 1}    
-  x[myIndex-1].style.display = "block";  
-  setTimeout(carousel, 2000);
+
+  })
 }
 
+container.addEventListener("click", startConversation("hola"))
 
+var apikey = "mRmw9Qwe^qC!Vbz2jzUm#fg4A4n5LKgFJCZgEXNU%+QRX^CQKd2vbfnHk^BJnhk8phyS=SkGaauJG@_#yqPTBEfdbrRv&bMj+#J2msAY_WCF!58BnTqcV?n2anM^QqSmCj%FZmuzKTXN_uh55_6u*#evk4Jx9AHT6NXbZDxRU=v8-B2TJ%e=Pn92gq2QfCKa2LDx7f*4qc8K6=6t@pKkdbZKCGKChu5d+_G5?9XcMzpxX7E!F9U2jfEQdJDNye$-";
+
+
+function startApplication(data){
+  var container = document.getElementById("widget");
+  var div = document.createElement("div");
+  div.className = "ejemplo";
+  div.innerHTML = data.ejemplo
+  
+  //document.write( '<div class=\"prueba\"><div>hola</div></div>' );
+  container.innerHTML = drawBubble(data.ejemplo)
+  container.append(div);
+  container.addEventListener("click", startConversation("hola"))
+}
+
+function sendMessageWatson(message = '',callback){
+  console.log("aqui")
+    var x = new XMLHttpRequest()
+    var url = 'https://apropo-assistant-backend-dev.mybluemix.net/web/receive'
+    //console.log(`url: ${url}`)
+    x.open('POST',url,true)
+    x.setRequestHeader('Content-type','application/json')
+    x.setRequestHeader('Authorization',"mRmw9Qwe^qC!Vbz2jzUm#fg4A4n5LKgFJCZgEXNU%+QRX^CQKd2vbfnHk^BJnhk8phyS=SkGaauJG@_#yqPTBEfdbrRv&bMj+#J2msAY_WCF!58BnTqcV?n2anM^QqSmCj%FZmuzKTXN_uh55_6u*#evk4Jx9AHT6NXbZDxRU=v8-B2TJ%e=Pn92gq2QfCKa2LDx7f*4qc8K6=6t@pKkdbZKCGKChu5d+_G5?9XcMzpxX7E!F9U2jfEQdJDNye$-")
+
+    x.send(JSON.stringify({input:{text:message},context:{}}))
+    x.onreadystatechange = () => {
+        if(x.readyState === 4 && x.status === 200 && x.responseText){
+            callback(JSON.parse(x.responseText))
+        }
+    }
+}
 
 </script>
-
 
 </body>
 </html>
