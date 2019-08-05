@@ -3,12 +3,12 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-  background-color:#859cc7;
+  justify-content: flex-start;
+  background-color:rgb(189, 189, 189);
   cursor: pointer;
   border-radius: 35px;
   box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
-  width: 183px;
+  width: 220px;
   height: 70px;
   padding: 0 16px;
   position: fixed;
@@ -19,17 +19,20 @@
   width: 50px;
   height: 50px;
   background-color: transparent;
+  border-radius: 50%;
+  background: #fff;
 }
 .chatwidget-bubble .chatwidget-bubble-avatar img {
   width: 100%;
 }
 .chatwidget-bubble .chatwidget-bubble-title {
-  color: #53337a;
+  color: #fff;
   font-weight: bolder;
   font-size: 13px;
-  width: 83px;
   text-align: center;
   line-height: 14px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
 .chatwidget-bubble .chatwidget-bubble-button {
   display: flex;
@@ -71,22 +74,31 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: auto;
+  width: 100%;
   align-items: stretch;
   min-height: 70px;
-  padding: 0 135px;
+  /*padding: 0 135px;*/
 }
 .chatwidget .chatwidget-assistant {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.chatwidget .chatwidget-assistant-avatar {
+/*.chatwidget .chatwidget-assistant-avatar {
   position: relative;
   left: -70px;
   width: 50px;
   height: 50px;
   margin-right: 10px;
+}*/
+.chatwidget .chatwidget-assistant-avatar {
+  position: relative;
+  left: 20px;
+  width: 50px;
+  height: 50px;
+  margin-right: 40px;
+  border-radius: 50%;
+  background: #fff;
 }
 .chatwidget .chatwidget-assistant-info {
   display: flex;
@@ -122,9 +134,10 @@
   background-color: transparent;
   color: #fff;
   outline: none;
-  font-size: 30px;
-  font-weight: thin;
+  font-size: 20px;
+  font-weight: 100;
   cursor: pointer;
+  margin-right: 10px;
 }
 .chatwidget .chatwidget-content {
   padding: 10px 20px 10px 25px;
