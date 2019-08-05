@@ -208,11 +208,15 @@ function startWidgetChat(data){
               //Enviar de acuerdo a action
               switch(b.action){
                   case "ACTION_show_video":
-                      // output.video
+											// output.video
+											//receivedVideo(b.text[i])
                       break;
                   case "ACTION_show_image":
                       // output.image
-                      break;
+											break;
+									case "ACTION_show_audio":
+										// output.image
+										break;
                   case "ACTION_show_template_generic":
                       //tomar output.elements_facebook
                       break;
@@ -222,6 +226,9 @@ function startWidgetChat(data){
                   case "ACTION_show_buttons":
                       // output.elements
                       break;
+									case "ACTION_show_select":
+									// output.elements
+									break;
                   default:
                       break;
               }
