@@ -85,34 +85,43 @@ function startWidgetChat(data){
       
       //Dibujar divider
       var divider = document.createElement("div");
-    divider.className = "chatwidget-divider";
+      divider.className = "chatwidget-divider";
       containerWidget.appendChild(divider);
       var hr = document.createElement("hr");
       divider.appendChild(hr);
       
       //Formulario
       var form = document.createElement("form");
-    form.className = "chatwidget chatwidget-controls";
+      form.className = "chatwidget chatwidget-controls";
       containerWidget.appendChild(form);
       form.onsubmit = sendMessage
 
-      var textarea = document.createElement("textarea");
-      textarea.className = "chatwidget chatwidget-controls-textinput";
-      textarea.setAttribute("rows","1");
-      textarea.setAttribute("id","input-text");
-      textarea.setAttribute("autocomplete","off");
-      textarea.setAttribute("placeholder","Escribe tu mensaje");
-      form.appendChild(textarea);
-  
-      var submit = document.createElement("button");
-    submit.className = "chatwidget chatwidget-controls-submit";
-      submit.setAttribute("type","submit");
-      submit.onclick = sendMessage;
-      var img_send = document.createElement("img");
-      img_send.src ="images/send.png";
-      submit.appendChild(img_send);
-    form.appendChild(submit);
-  
+        var textarea = document.createElement("textarea");
+        textarea.className = "chatwidget chatwidget-controls-textinput";
+        textarea.setAttribute("rows","1");
+        textarea.setAttribute("id","input-text");
+        textarea.setAttribute("autocomplete","off");
+        textarea.setAttribute("placeholder","Escribe tu mensaje");
+        form.appendChild(textarea);
+        
+          // Submit 
+          var submit = document.createElement("button");
+          submit.className = "chatwidget chatwidget-controls-submit";
+          submit.setAttribute("type","submit");
+          submit.onclick = sendMessage;
+          textarea.addEventListener("keypress", function (key){
+              if (key.which == 13 || key.keyCode == 13) {
+              sendMessage(key);
+              console.log(key)}})
+            /*(function (key){
+            if (key.which == 13 || key.keyCode == 13) {
+            sendMessage;            
+            }})*/
+          var img_send = document.createElement("img");
+          img_send.src ="images/send.png";
+          submit.appendChild(img_send);
+          form.appendChild(submit);
+    
       /* FUNCIONES */
       //Abrir chat
     function open(){
@@ -126,6 +135,13 @@ function startWidgetChat(data){
           bubble.style.display = "flex";
       }
   
+/*    function pressedKey (event) {
+      submit.addEventListener = ("keydown", function (key){
+      if (key.which == 13 || key.keyCode == 13) {
+      sendMessage;            
+  }
+   console.log ("no");
+ })};*/
       //Enviar mensaje a watson e imprimir mensaje de usuario
     function sendMessage(e) {
         e.preventDefault()
@@ -147,8 +163,6 @@ function startWidgetChat(data){
             var parr_sent = document.createElement("p");
             parr_sent.innerHTML = input_text.value;
             sent_content.appendChild(parr_sent);
-            
-            
                  
           content.appendChild(message_sent);
           
@@ -187,7 +201,6 @@ function startWidgetChat(data){
                             var hour = getTime()
                             time.innerHTML = hour;
 }
-  
       //Enviar mensaje a watson
       function sendMessageWatson(message = '',callback){
           var x = new XMLHttpRequest()
@@ -223,6 +236,8 @@ function startWidgetChat(data){
               len = b.text.length;
               while(i<len){
                       receivedMessage(b.text[i])
+                      //Bajar hasta el último mensaje enviado
+                      content.scrollTop = content.scrollHeight
                       i++;
               }
               //Enviar de acuerdo a action
