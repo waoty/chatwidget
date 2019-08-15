@@ -162,6 +162,7 @@
   color: #c9c8c9;
   bottom: 0px;
   display: block;
+  padding-bottom: 40px;
 }
 .chatwidget hr {
   margin: 0px 20px;
@@ -178,7 +179,8 @@
   opacity: 1;
   display: inline-block;
   flex-grow: 2;
-  padding: 20px;
+  padding: 10px;
+  padding-bottom: 15px;
   width: 300px;
 
 }
@@ -215,9 +217,17 @@
   left: 0px;
   bottom: 0px;
   padding: 1px;
-  margin-bottom: 0px
+  margin-bottom: 0px;
 }
-
+.chatwidget .chatwidget-message .chatwidget-sent-time{
+  font-size: 8px;
+  position: block;
+  right: 0px;
+  bottom: 0px;
+  padding: 1px;
+  margin-bottom: 0px;
+  width:30px;
+}
 .chatwidget .chatwidget-message-received {
   justify-content: flex-start;
 }
@@ -239,18 +249,12 @@
   margin: 5px;
   overflow-wrap: break-word;
   font-size: 13px;
+  text-align: justify;
 }
 .chatwidget .chatwidget-message .chatwidget-message-content a {
   text-decoration: underline;
   color: #f04b64;
   font-weight: 600;
-}
-.chatwidget .chatwidget-message .chatwidget-message-content audio {
-  display: block;
-  max-width: 100%;
-}
-.chatwidget .chatwidget-message .chatwidget-message-content a:hover {
-  text-decoration: underline;
 }
 .chatwidget .chatwidget-message-received .chatwidget-message-content {
   text-align: left;
@@ -261,6 +265,7 @@
 .chatwidget .chatwidget-message-sent .chatwidget-message-content {
   text-align: right;
   background-color: #f5f5f5;
+  color: #53337a;
   border-radius: 30px 30px 0 30px;
 }
 .chatwidget .chatwidget-message-avatar {
@@ -379,6 +384,97 @@
     width: 200px;
   }
 }
-.slider{
+.mySlides{
   display: none;
+  width: 100%;
+}
+.button-select{
+     background:  none;
+     height:  38px;
+     line-height:  40px;
+     border:  2px  #53337a;
+     display:  inline-block;
+     float:  none;
+     text-align:  center;
+     width:  70px;
+     padding:  0px!important;
+     font-size:  14px;
+     color:  #53337a;
+     font:inherit;
+}
+.button-select a:hover{
+     background:  #53337a;
+     height:  38px;
+     line-height:  40px;
+     border:  2px  solid white;
+     display:  inline-block;
+     float:  none;
+     text-align:  center;
+     width:  70px;
+     padding:  0px!important;
+     font-size:  14px;
+     color:  #fff;
+}
+.button-replies{
+
+}
+.button-select a:hover{
+
+}
+.button-replies a:hover{
+
+}
+
+.buttonLeft{
+  position: relative;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%,-50%);
+    border: none;
+    display: inline-block;
+    padding: 3px 8px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    text-transform: none;
+    font: inherit;
+    margin: 0;
+    box-sizing: inherit;
+}
+
+.buttonLeft:hover{
+  color: #000!important;
+    background-color: #ccc!important;
+}
+.buttonRight{
+  position: relative;
+    top: 50%;
+    right: 0%;
+    transform: translate(0%,-50%);
+    border: none;
+    display: inline-block;
+    padding: 3px 8px;
+    vertical-align: middle;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background-color: inherit;
+    text-align: center;
+    cursor: pointer;
+    white-space: nowrap;
+    user-select: none;
+    text-transform: none;
+    font: inherit;
+    margin: 0;
+    box-sizing: inherit;
+}
+.buttonRight:hover{
+  color: #000!important;
+    background-color: #ccc!important;
 }

@@ -5,7 +5,6 @@ function startWidgetChat(data){
       
       //Variable para identificar si se realizo la llamada de bienvenida
       var flg_start = false
-  
     /* BUBBLE */
     //Dibujar contenedor burbuja
     var bubble = document.createElement("div");
@@ -112,19 +111,16 @@ function startWidgetChat(data){
           textarea.addEventListener("keypress", function (key){
               if (key.which == 13 || key.keyCode == 13) {
               sendMessage(key);
-              console.log(key)}})
-            /*(function (key){
-            if (key.which == 13 || key.keyCode == 13) {
-            sendMessage;            
-            }})*/
+            }})
+
           var img_send = document.createElement("img");
           img_send.src ="images/send.png";
           submit.appendChild(img_send);
           form.appendChild(submit);
-    
+     
       /* FUNCIONES */
       //Abrir chat
-    function open(){
+      function open(){
           containerWidget.style.display = "flex"
           bubble.style.display = "none"
           startApplication({ message:"hola" })
@@ -134,49 +130,41 @@ function startWidgetChat(data){
           containerWidget.style.display = "none";
           bubble.style.display = "flex";
       }
-  
-/*    function pressedKey (event) {
-      submit.addEventListener = ("keydown", function (key){
-      if (key.which == 13 || key.keyCode == 13) {
-      sendMessage;            
-  }
-   console.log ("no");
- })};*/
       //Enviar mensaje a watson e imprimir mensaje de usuario
-    function sendMessage(e) {
-        e.preventDefault()
-        var input_text = document.getElementById("input-text");
-        var message_sent = document.createElement("div");
-        bubble.setAttribute("id", "mes_sent");
-        message_sent.className = "chatwidget-message chatwidget-message-sent";
+      function sendMessage(e) {
+          e.preventDefault()
+          var input_text = document.getElementById("input-text");
+          var message_sent = document.createElement("div");
+          bubble.setAttribute("id", "mes_sent");
+          message_sent.className = "chatwidget-message chatwidget-message-sent";
+              
+            var time = document.createElement("div")
+            time.className = "chatwidget-message chatwidget-sent-time"
+            message_sent.appendChild(time)
+            var hour = getTime()
+            time.innerHTML = hour;
             
-          var time = document.createElement("div")
-          time.className = "chatwidget-message chatwidget-time"
-          message_sent.appendChild(time)
-          var hour = getTime()
-          time.innerHTML = hour;
-          
-          var sent_content = document.createElement("div");
-          sent_content.className = "chatwidget-message-content";
-          message_sent.appendChild(sent_content);
-  
-            var parr_sent = document.createElement("p");
-            parr_sent.innerHTML = input_text.value;
-            sent_content.appendChild(parr_sent);
-                 
-          content.appendChild(message_sent);
-          
-          printConversation({message:input_text.value})
-          
-    }
+            var sent_content = document.createElement("div");
+            sent_content.className = "chatwidget-message-content";
+            message_sent.appendChild(sent_content);
+    
+              var parr_sent = document.createElement("p");
+              parr_sent.innerHTML = input_text.value;
+              sent_content.appendChild(parr_sent);
+                   
+                content.appendChild(message_sent);
+                printConversation({message:input_text.value})
+                submit.onclick = textarea.value = ''
+      }
       //Buscar el tiempo del mensaje
       function getTime(){
               var today = new Date();
               var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
               return time;
       }
+        /*Funciones de utilidades*/
       //Imprime mensaje del usuario, texto simple
-      function receivedMessage(element){
+      function AVText(element){
           var message_received = document.createElement("div");
           message_received.className = "chatwidget-message chatwidget-message-received";
           content.appendChild(message_received);
@@ -200,7 +188,163 @@ function startWidgetChat(data){
                             message_received.appendChild(time)
                             var hour = getTime()
                             time.innerHTML = hour;
-}
+      }
+      //imprime una imagen al usuario
+      function AVImage(element,url){
+          var message_received = document.createElement("div")
+          message_received.className = "chatwidget-message chatwidget-message-received"
+          content.appendChild(message_received)
+                    var img_r = document.createElement("img")
+                    img_r.className = "chatwidget-message-avatar"
+                    img_r.setAttribute("alt","Avatar")
+                    img_r.src = "images/avatar.svg";
+                    message_received.appendChild(img_r)
+
+                var mes_content = document.createElement("div")
+                mes_content.className = "chatwidget-message-content"
+                message_received.appendChild(mes_content)
+
+                var mes_img = document.createElement("img");
+                    mes_img.className = "message_image";
+                    mes_img.src = element;
+                    mes_content.appendChild(mes_img);
+      }
+      //Imprime un video al usuario
+      function AVVideo(height,width,url){
+          var message_received = document.createElement("div")
+            message_received.className = "chatwidget-message chatwidget-message-received"
+            content.appendChild(message_received)
+            var img_r = document.createElement("img")
+                img_r.className = "chatwidget-message-avatar"
+                img_r.setAttribute("alt","Avatar")
+                img_r.src = "images/avatar.svg";
+                message_received.appendChild(img_r)
+
+                var mes_content = document.createElement("div")
+                mes_content.className = "chatwidget-message-content"
+                message_received.appendChild(mes_content)
+                var mes_vid = document.createElement("div")
+                const urlEncoded = encodeURIComponent(url)
+         
+                mes_vid.className = 'message-video'
+                mes_vid.innerHTML =
+                            `<iframe
+                              src="https://www.facebook.com/plugins/video.php?href=${urlEncoded}%2F&show_text=0"
+                              height="${height}"
+                              width="${width}"
+                              style="border:none;overflow:hidden"
+                              scrolling="no"
+                              frameborder="0"
+                              allowTransparency="true"
+                              allowFullScreen="true"
+                            >
+                            </iframe>`
+
+                    mes_vid.innerHTML = element
+                    mes_content.appendChild(mes_vid)
+            }
+
+      //Imprime un carusel de opciones al usuario
+      function AVGenTemplate(){
+          var message_received = document.createElement("div")
+              message_received.className = "chatwidget-message chatwidget-message-received"
+              content.appendChild(message_received)
+              var img_r = document.createElement("img")
+              img_r.className = "chatwidget-message-avatar"
+              img_r.setAttribute("alt","Avatar")
+              img_r.src = "images/avatar.svg";
+              message_received.appendChild(img_r)
+
+              var mes_content = document.createElement("div")
+              mes_content.className = "chatwidget-message-content"
+              message_received.appendChild(mes_content)
+
+              //botones del carusel 
+              var button_left = document.createElement("button")
+              button_left.className = "buttonLeft"
+              button_left.innerHTML = "&#10094;"
+              button_left.onclick = plusDivs(-1);
+              mes_content.appendChild(button_left)
+
+              var button_right = document.createElement("button")
+              button_right.className = "buttonRight"
+              button_right.innerHTML = "&#10095;"
+              button_left.onclick = plusDivs(1);
+              mes_content.appendChild(button_right)
+      }
+
+      //Imprime Quick Replies al usuario
+      function AVQuickReplies(element, content, option){
+          var message_received = document.createElement("div")
+              message_received.className = "chatwidget-message chatwidget-message-received"
+              content.appendChild(message_received)
+              var img_r = document.createElement("img")
+              img_r.className = "chatwidget-message-avatar"
+              img_r.setAttribute("alt","Avatar")
+              img_r.src = "images/avatar.svg";
+              message_received.appendChild(img_r)
+
+              var mes_content = document.createElement("div")
+              mes_content.className = "chatwidget-message-content"
+              message_received.appendChild(mes_content)
+          
+      }
+      //Imprime una lista al usuario
+      function AVSelect(elements){
+          var message_received = document.createElement("div")
+              message_received.className = "chatwidget-message chatwidget-message-received"
+              content.appendChild(message_received)
+              var img_r = document.createElement("img")
+              img_r.className = "chatwidget-message-avatar"
+              img_r.setAttribute("alt","Avatar")
+              img_r.src = "images/avatar.svg";
+              message_received.appendChild(img_r)
+
+              var mes_content = document.createElement("div")
+              mes_content.className = "chatwidget-message-content"
+              message_received.appendChild(mes_content)
+              
+              var len = elements.length;
+              var i = 0;
+              while(i<len){
+              var mes_parr = document.createElement("p")
+              mes_parr.innerHTML = elements[i] +',';
+              mes_content.appendChild(mes_parr)
+              i++        
+      }}
+      a = ["a","b","c"]
+      AVSelect(a)
+      function showButtons(title, action, url, payload){
+              var message_received = document.createElement("div")
+              message_received.className = "chatwidget-message chatwidget-message-received"
+              content.appendChild(message_received)
+              var img_r = document.createElement("img")
+              img_r.className = "chatwidget-message-avatar"
+              img_r.setAttribute("alt","Avatar")
+              img_r.src = "images/avatar.svg";
+              message_received.appendChild(img_r)
+
+              var mes_content = document.createElement("div")
+              mes_content.className = "chatwidget-message-content"
+              message_received.appendChild(mes_content)
+
+              var i = 0;
+              var title_len = title.length
+              while(i<title_len){
+                var title = document.createElement("button")
+                title.className = "button-select"
+                title.innerHTML = title[i]
+                var url = url;
+                if(typeof url !== undefined){
+                  title.onclick = window.open(url)
+                }
+                var payload
+                if(typeof payload !== undefined){
+                  //title.onclick = action
+                }
+                mes_content.appendChild(title)
+                }
+              }
       //Enviar mensaje a watson
       function sendMessageWatson(message = '',callback){
           var x = new XMLHttpRequest()
@@ -216,83 +360,70 @@ function startWidgetChat(data){
               }
           }
       }
+
       //Iniciar aplicación
       function startApplication(data){
           flg_start = true;
           printConversation(data);
       }
-  
+      
       //Revisar lista de actions
       function printConversation(data){
-          //loader
           sendMessageWatson(data.message,function(res){
               var a = res;
-              var b = res.output;
-              console.log(a)
-              console.log(b.text[0])
-              console.log(b)
+              var resp = a.output;
+              console.log(resp)
+              console.log(resp.text)
+              console.log(typeof resp.text)
+              
+
+              switch(typeof resp.text){ 
               //Enviar mensajes de texto, options
-              i = 0;
-              len = b.text.length;
+              case "object":
+              var i = 0;
+              console.log(resp)
+              len = resp.text.length;
+              //while que pase por todo el generic para ver què clase de cosas tengo que imprimir
               while(i<len){
-                      receivedMessage(b.text[i])
+                      AVText(resp.text[i])
                       //Bajar hasta el último mensaje enviado
                       content.scrollTop = content.scrollHeight
                       i++;
-              }
-              //Enviar de acuerdo a action
-              switch(b.action){
-                  case "ACTION_show_video":
-											// output.video
-											//receivedVideo(b.text[i])
-                      break;
-                  case "ACTION_show_image":
-                      // output.image
-											break;
-									case "ACTION_show_audio":
-										// output.image
-										break;
-                  case "ACTION_show_template_generic":
-                      //tomar output.elements_facebook
-                      break;
-                  case "ACTION_show_quick_replies":
-                      //evaluar
-                      break;
-                  case "ACTION_show_buttons":
-                      // output.elements
-                      break;
-									case "ACTION_show_select":
-									// output.elements
-									break;
-                  default:
-                      break;
-              }
-              //lista de case de acuerdo al action, usar while dentro de cada case
-              //carousel, imagen, video, texto(default?)
-              //sentMessage(data.message);
-              
-          })
+                }
+              break;
+
+              case "undefined":
+                  //Enviar de acuerdo a action
+                  switch(resp.action){
+                      case "ACTION_show_video":
+    											AVVideo(video.height, video.width, video.elements.url)
+                          break;
+                      case "ACTION_show_image":
+                          AVImage(res,url);
+    											break;
+                      case "ACTION_show_template_generic":
+                          //tomar output.elements_facebook
+                          break;
+                      case "ACTION_show_quick_replies":
+                          //evaluar
+                          break;
+                      case "ACTION_show_buttons":
+                          showButtons()
+                          break;
+    									case "ACTION_show_select":
+    									     AVSelect(elements_web)
+    									break;
+                      default:
+                          break;
+                  }
+                  break;
+          }})
           content.scrollTop = content.scrollHeight
-      }
-  
-  
-    /*
-    
-  
-    var div2 = document.createElement("div");
-        div2.className = "chatwidget-toolbar";
-        header1.appendChild(div2);
-  
-    var button_close = document.createElement("button");
-    button_close.className = "chatwidget-toolbar-button chatwidget-toolbar-button-close";
-    button_close.innerHTML = "x";
-    button_close.onclick = close;
-    div2.appendChild(button_close);
-  
-    
-  
-    
-    var loader = document.getElementById("loader");
+      } 
+
+  }
+     /*
+      var loader = document.getElementById("loader");
       loader.className = "chatwidget chatwidget-loader";
       var span1 = document.createElement("span");
       var span2 = document.createElement("span");
@@ -301,40 +432,4 @@ function startWidgetChat(data){
           loader.appendChild(span1);
           loader.appendChild(span2);
           loader.appendChild(span3);
-  
-   
-    container.addEventListener("click", startConversation("hola"))
-  
-    var apikey = "mRmw9Qwe^qC!Vbz2jzUm#fg4A4n5LKgFJCZgEXNU%+QRX^CQKd2vbfnHk^BJnhk8phyS=SkGaauJG@_#yqPTBEfdbrRv&bMj+#J2msAY_WCF!58BnTqcV?n2anM^QqSmCj%FZmuzKTXN_uh55_6u*#evk4Jx9AHT6NXbZDxRU=v8-B2TJ%e=Pn92gq2QfCKa2LDx7f*4qc8K6=6t@pKkdbZKCGKChu5d+_G5?9XcMzpxX7E!F9U2jfEQdJDNye$-";
-  
-  
-    function startApplication(data){
-      var container = document.getElementById("widget");
-      var div = document.createElement("div");
-      div.className = "ejemplo";
-      div.innerHTML = data.ejemplo
-      
-      //document.write( '<div class=\"prueba\"><div>hola</div></div>' );
-      container.innerHTML = drawBubble(data.ejemplo)
-      container.append(div);
-      container.addEventListener("click", startConversation("hola"))
-    }
-  
-    function sendMessageWatson(message = '',callback){
-      console.log("aqui")
-        var x = new XMLHttpRequest()
-        var url = 'https://apropo-assistant-backend-dev.mybluemix.net/web/receive'
-        //console.log(`url: ${url}`)
-        x.open('POST',url,true)
-        x.setRequestHeader('Content-type','application/json')
-        x.setRequestHeader('Authorization',"mRmw9Qwe^qC!Vbz2jzUm#fg4A4n5LKgFJCZgEXNU%+QRX^CQKd2vbfnHk^BJnhk8phyS=SkGaauJG@_#yqPTBEfdbrRv&bMj+#J2msAY_WCF!58BnTqcV?n2anM^QqSmCj%FZmuzKTXN_uh55_6u*#evk4Jx9AHT6NXbZDxRU=v8-B2TJ%e=Pn92gq2QfCKa2LDx7f*4qc8K6=6t@pKkdbZKCGKChu5d+_G5?9XcMzpxX7E!F9U2jfEQdJDNye$-")
-  
-        x.send(JSON.stringify({input:{text:message},context:{}}))
-        x.onreadystatechange = () => {
-            if(x.readyState === 4 && x.status === 200 && x.responseText){
-                callback(JSON.parse(x.responseText))
-            }
-        }
-    }
-    */
-  }
+  */
