@@ -245,7 +245,7 @@ function startWidgetChat(data){
             }
 
       //Imprime un carusel de opciones al usuario
-      function AVGenTemplate(){
+      function AVGenTemplate(elemnts){
           var message_received = document.createElement("div")
               message_received.className = "chatwidget-message chatwidget-message-received"
               content.appendChild(message_received)
@@ -271,8 +271,46 @@ function startWidgetChat(data){
               button_right.innerHTML = "&#10095;"
               button_left.onclick = plusDivs(1);
               mes_content.appendChild(button_right)
-      }
+                  var slideIndex = 1;
+                  showDivs(slideIndex);
 
+                  function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                  }
+
+                  function showDivs(n) {
+                    var i;
+                    console.log(x)
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) {slideIndex = 1}
+                    if (n < 1) {slideIndex = x.length}
+                    for (i = 0; i < x.length; i++) {
+                      x[i].style.display = "none";  
+                    }
+                    console.log(x)
+                    x[slideIndex-1].style.display = "block";  
+                  }
+
+              var i = 0;
+              var ele_length = elemnts.length
+              while (i<ele_length){
+                var element = document.createElement("div")
+                elemnt.innerHTML = elements[i];
+                mes_content.appendChild(element)
+                i++
+              }
+      }
+var b = document.createElement("div")
+var a = document.createElement("p");
+a.className = "mySlides"
+var c = document.createElement("p");
+c.className = "mySlides"
+var d = document.createElement("p");
+d.className = "mySlides"
+b.appendChild(a)
+b.appendChild(c)
+b.appendChild(d)
+a.className = "mySlides"
       //Imprime Quick Replies al usuario
       function AVQuickReplies(element, content, option){
           var message_received = document.createElement("div")
@@ -312,8 +350,6 @@ function startWidgetChat(data){
               mes_content.appendChild(mes_parr)
               i++        
       }}
-      a = ["a","b","c"]
-      AVSelect(a)
       function showButtons(title, action, url, payload){
               var message_received = document.createElement("div")
               message_received.className = "chatwidget-message chatwidget-message-received"
@@ -372,29 +408,27 @@ function startWidgetChat(data){
           sendMessageWatson(data.message,function(res){
               var a = res;
               var resp = a.output;
-              console.log(resp)
-              console.log(resp.text)
-              console.log(typeof resp.text)
-              
-
-              switch(typeof resp.text){ 
-              //Enviar mensajes de texto, options
-              case "object":
               var i = 0;
-              console.log(resp)
-              len = resp.text.length;
-              //while que pase por todo el generic para ver què clase de cosas tengo que imprimir
-              while(i<len){
-                      AVText(resp.text[i])
-                      //Bajar hasta el último mensaje enviado
-                      content.scrollTop = content.scrollHeight
-                      i++;
-                }
-              break;
+              var gen = resp.generic.length
+              console.log(resp.generic)
+              while(i<gen){
+                switch(resp.generic[i].response_type){ 
+                //Enviar mensajes de texto, options
+                case "text":
+                AVText(resp.generic[i].text)
+                //Bajar hasta el último mensaje enviado
+                content.scrollTop = content.scrollHeight
 
-              case "undefined":
-                  //Enviar de acuerdo a action
-                  switch(resp.action){
+                break;
+                case "image":
+                    AVImage(res,url);
+                break;
+                case "options":
+                break;
+
+                case "undefined":
+                    //Enviar de acuerdo a action
+                    switch(resp.action){
                       case "ACTION_show_video":
     											AVVideo(video.height, video.width, video.elements.url)
                           break;
@@ -416,8 +450,13 @@ function startWidgetChat(data){
                       default:
                           break;
                   }
+                 
                   break;
-          }})
+                }
+         i++
+       }
+     }
+   )
           content.scrollTop = content.scrollHeight
       } 
 
